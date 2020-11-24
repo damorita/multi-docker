@@ -1,0 +1,30 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "dlameyer/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "dlameyer/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "dlameyer/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dlameyer/multi-nginx",
+            "essential": true,
+            "portMappings": [{ "hostPort": 80, "containerPort": 80}],
+            "links": ["client", "server"]
+        }
+    ]
+}
